@@ -1,0 +1,70 @@
+version: '2'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  redis:
+    image: 'bitnami/redis:latest'
+    container_name: redis
+    ports:
+      - "6379:6379"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    networks:
+      - app-network
+  unit_a:
+    depends_on:
+      - redis
+    image: 'unit_a'
+    environment:
+      unitId: 'unit_a'
+    build:
+      context: ./unit_a
+      dockerfile: Dockerfile
+      args:
+        unitId: unit_a
+    container_name: unit_a
+    networks:
+      - app-network
+  unit_b:
+    depends_on:
+      - redis
+    image: 'unit_b'
+    environment:
+      unitId: 'unit_b'
+    build:
+      context: ./unit_b
+      dockerfile: Dockerfile
+      args:
+        unitId: unit_b
+    container_name: unit_b
+    networks:
+      - app-network
+  entry_point:
+    depends_on:
+      - redis
+    image: 'entry_point'
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: entry_point
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+  unit_group:
+    image: 'unit_group'
+    depends_on:
+      - redis
+    environment:
+      unitId: 'unit_group'
+    build:
+      context: ./unit_group
+      dockerfile: Dockerfile
+      args:
+        unitId: unit_group
+    container_name: unit_group
+    networks:
+      - app-network
