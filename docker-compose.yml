@@ -21,8 +21,8 @@ services:
     environment:
       unitId: 'unit_a'
     build:
-      context: ./unit_a
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./unit_a/Dockerfile
       args:
         unitId: unit_a
     container_name: unit_a
@@ -35,8 +35,8 @@ services:
     environment:
       unitId: 'unit_b'
     build:
-      context: ./unit_b
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./unit_b/Dockerfile
       args:
         unitId: unit_b
     container_name: unit_b
@@ -47,8 +47,8 @@ services:
       - redis
     image: 'entry_point'
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./server/Dockerfile
     container_name: entry_point
     ports:
       - "3000:3000"
@@ -61,8 +61,8 @@ services:
     environment:
       unitId: 'unit_group'
     build:
-      context: ./unit_group
-      dockerfile: Dockerfile
+      context: ./
+      dockerfile: ./unit_group/Dockerfile
       args:
         unitId: unit_group
     container_name: unit_group
