@@ -23,7 +23,7 @@ app.post('/file/', RednomicUpload, (req, res, next) => {
 app.get('/unit', (req, res, next) => {
   RS.use('unit_c', {}, req, next);
 }, async (req, res) => {
-  res.status(200).send(JSON.stringify(req.rednomic));
+  res.status(200).send(JSON.stringify(RS.getHealthStatuses()));
 });
 
 app.listen(config.server.port, () => {
