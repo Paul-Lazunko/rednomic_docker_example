@@ -1,5 +1,5 @@
 import { RednomicUnit } from "rednomic";
-import { streamUploader } from "./awsS3streamUploader";
+import { streamUploader } from "./app/awsS3streamUploader";
 import config from "./config";
 
 let service = new RednomicUnit({

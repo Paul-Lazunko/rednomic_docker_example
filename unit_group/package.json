@@ -12,6 +12,6 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "esm": "^3.2.25",
-    "rednomic": "^3.0.10"
+    "rednomic": "^3.0.11"
   }
 }

@@ -18,8 +18,6 @@ services:
     depends_on:
       - redis
     image: 'unit_a'
-    environment:
-      unitId: 'unit_a'
     build:
       context: ./
       dockerfile: ./unit/Dockerfile
@@ -32,8 +30,6 @@ services:
     depends_on:
       - redis
     image: 'unit_b'
-    environment:
-      unitId: 'unit_b'
     build:
       context: ./
       dockerfile: ./unit/Dockerfile
@@ -58,13 +54,12 @@ services:
     image: 'unit_group'
     depends_on:
       - redis
-    environment:
-      unitId: 'unit_group'
     build:
       context: ./
       dockerfile: ./unit_group/Dockerfile
       args:
         unitId: unit_group
+        units: 'unit_a unit_b'
     container_name: unit_group
     networks:
       - app-network

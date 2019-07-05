@@ -3,7 +3,8 @@ FROM node:10
 # Create app directory
 WORKDIR /usr/src/app
 
-ENV unitId $unitId
+ARG unitId=$unitId
+ARG units=$units
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -11,6 +12,7 @@ ENV unitId $unitId
 COPY ./unit_group/package.json ./
 COPY ./.env ./
 RUN   echo "unitId=${unitId}" >> .env
+RUN   echo "units=${units}" >> .env
 
 RUN npm install
 # If you are building your code for production

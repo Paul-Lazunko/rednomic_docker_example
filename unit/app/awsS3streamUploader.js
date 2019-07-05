@@ -1,4 +1,4 @@
-import config from './config';
+import config from '../config';
 import UploadStream from 's3-stream-upload'
 import { S3 } from 'aws-sdk'
 
