@@ -22,7 +22,7 @@ services:
       unitId: 'unit_a'
     build:
       context: ./
-      dockerfile: ./unit_a/Dockerfile
+      dockerfile: ./unit/Dockerfile
       args:
         unitId: unit_a
     container_name: unit_a
@@ -36,7 +36,7 @@ services:
       unitId: 'unit_b'
     build:
       context: ./
-      dockerfile: ./unit_b/Dockerfile
+      dockerfile: ./unit/Dockerfile
       args:
         unitId: unit_b
     container_name: unit_b

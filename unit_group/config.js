@@ -1,8 +1,9 @@
+import process from 'process';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-  unitId: 'unit_group',
+  unitId: process.env.unitId,
   db: {
     redis: {
       host: 'redis',

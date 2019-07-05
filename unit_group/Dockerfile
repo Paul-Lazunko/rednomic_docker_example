@@ -10,6 +10,7 @@ ENV unitId $unitId
 # where available (npm@5+)
 COPY ./unit_group/package.json ./
 COPY ./.env ./
+RUN   echo "unitId=${unitId}" >> .env
 
 RUN npm install
 # If you are building your code for production

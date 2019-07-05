@@ -1,8 +1,9 @@
+import process from 'process';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-  unitId: 'unit_a',
+  unitId: process.env.unitId,
   service: {
     awsS3: {
       accessKeyId: process.env.awsS3AccessKeyId,
