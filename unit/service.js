@@ -5,8 +5,8 @@ import config from "./config";
 let service = new RednomicUnit({
   redisServer: config.db.redis,
   unitId: config.unitId,
-  requestTimeout: 10000,
-  logsExpire: 86400,
+  requestTimeout: config.requestTimeout,
+  logsExpire: config.logsExpire,
   service: async function (data) {
     let files = [], errors = [];
     await Promise.all(this.files.map(async file => {

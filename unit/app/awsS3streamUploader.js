@@ -16,7 +16,6 @@ const streamUploader = async (file) => {
         ACL: 'public-read'
     }))
       .on("error", function (error) {
-        console.log('file error', error)
         return reject(error);
       })
       .on("finish", function (data) {

@@ -4,6 +4,8 @@ dotenv.config();
 
 export default {
   unitId: process.env.unitId,
+  requestTimeout: parseInt(process.env.requestTimeout, 10),
+  logsExpire: parseInt(process.env.logsExpire, 10),
   service: {
     awsS3: {
       accessKeyId: process.env.awsS3AccessKeyId,
@@ -14,8 +16,8 @@ export default {
   },
   db: {
     redis: {
-      host: 'redis',
-      port: 6379
+      host: process.env.redisHost,
+      port: process.env.redisPort
     }
   }
 }

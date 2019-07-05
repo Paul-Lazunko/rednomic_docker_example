@@ -1,14 +1,20 @@
+import process from 'process';
 import * as dotenv from 'dotenv';
-dotenv.config(__dirname + '/../.env');
+dotenv.config();
+
+let units = process.env.units.split(' ') || [];
 
 export default {
   server: {
-    port: 3000
+    port: parseInt(process.env.serverPort, 10)
   },
+  requestTimeout: parseInt(process.env.requestTimeout, 10),
+  pingTimeout: parseInt(process.env.pingTimeout, 10),
+  units: units.map(unitId => { return { unitId } }),
   db: {
     redis: {
-      host: 'redis',
-      port: 6379
+      host: process.env.redisHost,
+      port: process.env.redisPort
     }
   }
 }

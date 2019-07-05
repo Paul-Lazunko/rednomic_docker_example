@@ -8,6 +8,6 @@ let service = new RednomicUnitGroup({
     { unitId: 'unit_a'},
     { unitId: 'unit_b'}
   ],
-  pingTimeout: 15000
+  pingTimeout: config.pingTimeout
 });
 

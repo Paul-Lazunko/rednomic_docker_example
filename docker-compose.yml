@@ -3,7 +3,6 @@ version: '2'
 networks:
   app-network:
     driver: bridge
-
 services:
   redis:
     image: 'bitnami/redis:latest'
@@ -23,6 +22,10 @@ services:
       dockerfile: ./unit/Dockerfile
       args:
         unitId: unit_a
+        requestTimeout: 10000
+        logsExpire: 86400
+        redisHost: 'redis'
+        redisPort: 6379
     container_name: unit_a
     networks:
       - app-network
@@ -35,6 +38,10 @@ services:
       dockerfile: ./unit/Dockerfile
       args:
         unitId: unit_b
+        requestTimeout: 10000
+        logsExpire: 86400
+        redisHost: 'redis'
+        redisPort: 6379
     container_name: unit_b
     networks:
       - app-network
@@ -45,6 +52,13 @@ services:
     build:
       context: ./
       dockerfile: ./server/Dockerfile
+      args:
+        requestTimeout: 10000
+        pingTimeout: 3000
+        serverPort: 3000
+        units: 'unit_group'
+        redisHost: 'redis'
+        redisPort: 6379
     container_name: entry_point
     ports:
       - "3000:3000"
@@ -60,6 +74,10 @@ services:
       args:
         unitId: unit_group
         units: 'unit_a unit_b'
+        requestTimeout: 10000
+        pingTimeout: 3000
+        redisHost: 'redis'
+        redisPort: 6379
     container_name: unit_group
     networks:
       - app-network

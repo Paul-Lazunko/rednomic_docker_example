@@ -15,8 +15,8 @@ const RS = new RednomicServer({
       description: 'upload file service'
     }
   ],
-  requestTimeout: 15000,
-  pingTimeout: 15000
+  requestTimeout: config.requestTimeout,
+  pingTimeout: config.pingTimeout
 });
 
 app.post('/file/', RednomicUpload, (req, res, next) => {
