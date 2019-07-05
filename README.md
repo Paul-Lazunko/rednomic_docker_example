@@ -18,7 +18,9 @@ docker-compose up -d;
 
 ```
 
-Send file in FormData (POST http://localhost:3000/file) via Postman or in another way.
+Send file in FormData (POST http://localhost:3000/file) via Postman or in another way to test unit group which proxy upload units
+
+Send request (GET http://localhost:3000/unit) to test simple unit
 
 ;)
 

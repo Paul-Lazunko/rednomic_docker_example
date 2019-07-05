@@ -9,19 +9,20 @@ const RS = new RednomicServer({
     host: 'redis',
     port: 6379
   },
-  units: [
-    {
-      unitId: 'unit_group',
-      description: 'upload file service'
-    }
-  ],
+  units: config.units,
   requestTimeout: config.requestTimeout,
   pingTimeout: config.pingTimeout
 });
 
 app.post('/file/', RednomicUpload, (req, res, next) => {
   RS.use('unit_group', {}, req, next);
-}, async (req, res, next) => {
+}, async (req, res) => {
+  res.status(200).send(JSON.stringify(req.rednomic));
+});
+
+app.get('/unit', (req, res, next) => {
+  RS.use('unit_c', {}, req, next);
+}, async (req, res) => {
   res.status(200).send(JSON.stringify(req.rednomic));
 });
 

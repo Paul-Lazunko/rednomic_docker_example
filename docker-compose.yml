@@ -19,7 +19,7 @@ services:
     image: 'unit_a'
     build:
       context: ./
-      dockerfile: ./unit/Dockerfile
+      dockerfile: ./upload_unit/Dockerfile
       args:
         unitId: unit_a
         requestTimeout: 10000
@@ -35,7 +35,7 @@ services:
     image: 'unit_b'
     build:
       context: ./
-      dockerfile: ./unit/Dockerfile
+      dockerfile: ./upload_unit/Dockerfile
       args:
         unitId: unit_b
         requestTimeout: 10000
@@ -45,6 +45,22 @@ services:
     container_name: unit_b
     networks:
       - app-network
+  unit_c:
+      depends_on:
+        - redis
+      image: 'unit_c'
+      build:
+        context: ./
+        dockerfile: ./simple_unit/Dockerfile
+        args:
+          unitId: unit_c
+          requestTimeout: 10000
+          logsExpire: 86400
+          redisHost: 'redis'
+          redisPort: 6379
+      container_name: unit_c
+      networks:
+        - app-network
   entry_point:
     depends_on:
       - redis
@@ -56,7 +72,7 @@ services:
         requestTimeout: 10000
         pingTimeout: 3000
         serverPort: 3000
-        units: 'unit_group'
+        units: 'unit_group unit_c'
         redisHost: 'redis'
         redisPort: 6379
     container_name: entry_point
