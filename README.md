@@ -18,7 +18,9 @@ docker-compose up -d;
 
 Send file in FormData (POST http://localhost:3000/file) via Postman or in another way to test unit group which proxy upload units
 
-Send request (GET http://localhost:3000/unit) to test simple unit
+Send request (GET http://localhost:3000/echo) to test simple unit
+
+Send request (GET http://localhost:3000/download) to test backward binary streaming from microservice to entry point
 
 
 
@@ -26,7 +28,7 @@ For rebuilding test app run:
 
 ```bash
 docker-compose down;
-docker rmi entry_point unit_a unit_b unit_c unit_group;
+docker rmi entry_point unit_a unit_b unit_c unit_d unit_group;
 docker-compose up -d;
 ```
 

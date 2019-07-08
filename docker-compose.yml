@@ -61,6 +61,22 @@ services:
       container_name: unit_c
       networks:
         - app-network
+  unit_d:
+      depends_on:
+        - redis
+      image: 'unit_d'
+      build:
+        context: ./
+        dockerfile: ./download_unit/Dockerfile
+        args:
+          unitId: unit_d
+          requestTimeout: 10000
+          logsExpire: 86400
+          redisHost: 'redis'
+          redisPort: 6379
+      container_name: unit_d
+      networks:
+        - app-network
   entry_point:
     depends_on:
       - redis
@@ -72,7 +88,7 @@ services:
         requestTimeout: 10000
         pingTimeout: 3000
         serverPort: 3000
-        units: 'unit_group unit_c'
+        units: 'unit_group unit_c unit_d'
         redisHost: 'redis'
         redisPort: 6379
     container_name: entry_point
