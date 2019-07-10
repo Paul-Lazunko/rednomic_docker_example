@@ -62,19 +62,52 @@ services:
       networks:
         - app-network
   unit_d:
+        depends_on:
+          - redis
+        image: 'unit_d'
+        build:
+          context: ./
+          dockerfile: ./download_unit/Dockerfile
+          args:
+            unitId: unit_d
+            requestTimeout: 10000
+            logsExpire: 86400
+            redisHost: 'redis'
+            redisPort: 6379
+        container_name: unit_d
+        networks:
+          - app-network
+  unit_e:
+        depends_on:
+          - redis
+        image: 'unit_e'
+        build:
+          context: ./
+          dockerfile: ./another_simple_unit/Dockerfile
+          args:
+            unitId: unit_e
+            requestTimeout: 10000
+            logsExpire: 86400
+            redisHost: 'redis'
+            redisPort: 6379
+        container_name: unit_e
+        networks:
+          - app-network
+  unit_group:
+      image: 'unit_group'
       depends_on:
         - redis
-      image: 'unit_d'
       build:
         context: ./
-        dockerfile: ./download_unit/Dockerfile
+        dockerfile: ./unit_group/Dockerfile
         args:
-          unitId: unit_d
+          unitId: unit_group
+          units: 'unit_a unit_b'
           requestTimeout: 10000
-          logsExpire: 86400
+          pingTimeout: 3000
           redisHost: 'redis'
           redisPort: 6379
-      container_name: unit_d
+      container_name: unit_group
       networks:
         - app-network
   entry_point:
@@ -94,22 +127,5 @@ services:
     container_name: entry_point
     ports:
       - "3000:3000"
-    networks:
-      - app-network
-  unit_group:
-    image: 'unit_group'
-    depends_on:
-      - redis
-    build:
-      context: ./
-      dockerfile: ./unit_group/Dockerfile
-      args:
-        unitId: unit_group
-        units: 'unit_a unit_b'
-        requestTimeout: 10000
-        pingTimeout: 3000
-        redisHost: 'redis'
-        redisPort: 6379
-    container_name: unit_group
     networks:
       - app-network

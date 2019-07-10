@@ -15,6 +15,7 @@ let service = new RednomicUnit({
       try {
         await streamUploader({ stream: file.stream, filename });
       } catch (e) {
+        this.log('error', e.message);
         errors.push(e.message);
       }
     }));
