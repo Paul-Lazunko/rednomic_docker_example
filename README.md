@@ -28,7 +28,7 @@ For rebuilding test app run:
 
 ```bash
 docker-compose down;
-docker rmi entry_point unit_a unit_b unit_c unit_d unit_group;
+docker rmi entry_point unit_a unit_b unit_c unit_d unit_e unit_group;
 docker-compose up -d;
 ```
 
