@@ -1,5 +1,14 @@
-node_modules
+.idea
+*.iml
+
+.gitignore
 .dockerignore
+
 Dockerfile
-npm-debug.log
-.git
+docker-compose.yml
+
+LICENSE
+
+node_modules
+
+README.md
